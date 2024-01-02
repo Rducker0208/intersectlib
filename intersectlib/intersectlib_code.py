@@ -147,3 +147,4 @@ def find_intersection_and_remainders(source, destination):
     intersection, remainders = find_values(source, destination, 'both')
     return intersection, remainders
 
+print('test')
