@@ -19,7 +19,7 @@ class TestFile(unittest.TestCase):
         self.assertRaises(InvalidArgumentError, find_intersection, [], (9, 10))
         self.assertRaises(InvalidArgumentError, find_intersection, range, (9, 10))
 
-    def test_intersection(self):
+    def testIntersection(self):
         # 1.1
         result = find_intersection((2, 10), (2, 5))
         self.assertEqual(result, (2, 5))
@@ -124,3 +124,107 @@ class TestFile(unittest.TestCase):
         result = find_intersection((500, 1000), (1500, 2000))
         self.assertEqual(result, None)
 
+    def testRemainders(self):
+        # 1.1
+        result = find_remainders((2, 10), (2, 5))
+        self.assertEqual(result, [(5, 10)])
+
+        result = find_remainders((1, 1000), (1, 200))
+        self.assertEqual(result, [(200, 1000)])
+
+        result = find_remainders((8000, 78909), (8000, 10000))
+        self.assertEqual(result, [(10000, 78909)])
+
+        result = find_remainders((-20, -10), (-20, -18))
+        self.assertEqual(result, [(-18, -10)])
+
+        # 1.2
+
+        result = find_remainders((2, 20), (8, 12))
+        self.assertEqual(result, [(2, 8), (12, 20)])
+
+        result = find_remainders((400, 1000), (800, 900))
+        self.assertEqual(result, [(400, 800), (900, 1000)])
+
+        result = find_remainders((1, 9999), (3, 6796))
+        self.assertEqual(result, [(1, 3), (6796, 9999)])
+
+        # 1.3
+        result = find_remainders((1, 20), (10, 20))
+        self.assertEqual(result, [(1, 10)])
+
+        result = find_remainders((200, 1000), (500, 1000))
+        self.assertEqual(result, [(200, 500)])
+
+        result = find_remainders((809, 5678), (1000, 5678))
+        self.assertEqual(result, [(809, 1000)])
+
+        # 2
+        result = find_remainders((5, 10), (1, 15))
+        self.assertEqual(result, [])
+
+        result = find_remainders((100, 200), (-200, 500))
+        self.assertEqual(result, [])
+
+        result = find_remainders((-1000, -500), (-1500, 0))
+        self.assertEqual(result, [])
+
+        # 3
+        result = find_remainders((2, 10), (2, 20))
+        self.assertEqual(result, [])
+
+        result = find_remainders((-100, -50), (-100, 0))
+        self.assertEqual(result, [])
+
+        result = find_remainders((-100, 100), (-100, 300))
+        self.assertEqual(result, [])
+
+        # 4
+        result = find_remainders((8, 10), (0, 10))
+        self.assertEqual(result, [])
+
+        result = find_remainders((300, 500), (100, 500))
+        self.assertEqual(result, [])
+
+        result = find_remainders((-400, -300), (-500, -300))
+        self.assertEqual(result, [])
+
+        # 5
+        result = find_remainders((2, 10), (5, 20))
+        self.assertEqual(result, [(2, 5)])
+
+        result = find_remainders((100, 500), (300, 1000))
+        self.assertEqual(result, [(100, 300)])
+
+        result = find_remainders((-300, 0), (-200, 500))
+        self.assertEqual(result, [(-300, -200)])
+
+        # 6
+        result = find_remainders((8, 10), (2, 9))
+        self.assertEqual(result, [(9, 10)])
+
+        result = find_remainders((100, 500), (50, 300))
+        self.assertEqual(result, [(300, 500)])
+
+        result = find_remainders((-50, 0), (-100, -20))
+        self.assertEqual(result, [(-20, 0)])
+
+        # 7
+        result = find_remainders((2, 10), (2, 10))
+        self.assertEqual(result, [])
+
+        result = find_remainders((-100, 250), (-100, 250))
+        self.assertEqual(result, [])
+
+        result = find_remainders((-100, -50), (-100, -50))
+        self.assertEqual(result, [])
+
+        # 8
+        result = find_remainders((-500, -100), (100, 500))
+        self.assertEqual(result, [(-500, -100)])
+
+        result = find_remainders((-1000, -400), (-350, -10))
+        self.assertEqual(result, [(-1000, -400)])
+
+        result = find_remainders((500, 1000), (1500, 2000))
+        self.assertEqual(result, [(500, 1000)])
