@@ -7,7 +7,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-VERSION = '1.1.1'
+VERSION = '1.0.0'
 DESCRIPTION = 'find intersections and remainders.'
 LONG_DESCRIPTION = 'A package to find intersections and remainders between two ranges.'
 
@@ -24,8 +24,8 @@ setup(
     install_requires=[],
     keywords=['python', 'ranges', 'intersections', 'destinations', 'remainders'],
     classifiers=[
-        "Development Status :: 1 - Developing",
-        "Intended Audience :: Users",
+        "Development Status :: 2 - Alpha",
+        "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
         "Operating System :: Unix",
         "Operating System :: MacOS :: MacOS X",

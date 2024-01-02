@@ -16,7 +16,15 @@ class InvalidRangeError(Exception):
         super().__init__(self.message)
 
 
+class NoneRangeError(Exception):
+    def __init__(self):
+        self.message = 'The arguments passed do not form a range'
+        super().__init__(self.message)
+
+
 def check_valid(source, destination):
+    # if source == destination:
+    #     ra
 
     # check if passed argument is a tuple or range
     if isinstance(source, tuple) is True:
@@ -57,13 +65,13 @@ def find_values(source, destination, return_value):
 
     # case 1.1
     if source_lowest == destination_lowest and source_highest > destination_highest:
-        print('1.2')
+        print('1.1')
         intersection = (destination_lowest, destination_highest)
         remainders.append((destination_highest, source_highest))
 
     # case 1.2
     elif source_lowest < destination_lowest and source_highest > destination_highest:
-        print('1.1')
+        print('1.2')
         intersection = (destination_lowest, destination_highest)
         remainders.append((source_lowest, destination_lowest))
         remainders.append((destination_highest, source_highest))
@@ -90,7 +98,7 @@ def find_values(source, destination, return_value):
         intersection = (source_lowest, source_highest)
 
     # case 5
-    elif source_lowest < destination_lowest and source_highest > destination_lowest:
+    elif source_lowest < destination_lowest and source_highest > destination_lowest:  # noqa
         print('5')
         intersection = (destination_lowest, source_highest)
         remainders.append((source_lowest, destination_lowest))
@@ -146,5 +154,3 @@ def find_intersection_and_remainders(source, destination):
     source, destination = check_valid(source, destination)
     intersection, remainders = find_values(source, destination, 'both')
     return intersection, remainders
-
-print('test')
