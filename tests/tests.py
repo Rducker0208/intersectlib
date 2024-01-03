@@ -6,7 +6,7 @@ sys.path.insert(1, 'C://Users//ducke//PycharmProjects//intersectlib//intersectli
 from intersectlib import find_remainders
 from intersectlib import find_intersection
 from intersectlib import find_intersection_and_remainders
-from intersectlib import transform_intersection
+from intersectlib import transform_existing_intersection
 from intersectlib import InvalidTupleError
 from intersectlib import InvalidRangeError
 from intersectlib import InvalidArgumentError

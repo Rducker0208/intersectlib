@@ -6,7 +6,7 @@ class InvalidArgumentError(Exception):
 
 class InvalidTupleError(Exception):
     def __init__(self):
-        self.message = 'The tupple passed contains more then 2 values, contains a non numeric value or the first number is higher then the second.' # noqa
+        self.message = 'The tupple passed contains more then 2 values, contains a non-numeric value or the first number is higher then the second.' # noqa
         super().__init__(self.message)
 
 
@@ -14,6 +14,10 @@ class InvalidRangeError(Exception):
     def __init__(self):
         self.message = 'The passed range is invalid.'
         super().__init__(self.message)
+
+class InvalidIntersectionError(Exception):
+    def __init__(self):
+        self.message = 'The provided intersection contains a non-numeric item, contains more then 2 items or the beginning value is higher then the end value.'
 
 
 class NoneRangeError(Exception):
@@ -23,8 +27,6 @@ class NoneRangeError(Exception):
 
 
 def check_valid(source, destination):
-    # if source == destination:
-    #     ra
 
     # check if passed argument is a tuple or range
     if isinstance(source, tuple) is True:
@@ -54,6 +56,21 @@ def check_valid(source, destination):
         raise InvalidArgumentError
 
     return source, destination
+
+
+def check_valid_intersection(intersection):
+    if isinstance(intersection, tuple) is True:
+        if all(isinstance(item, int) for item in intersection) is False or len(intersection) > 2 or intersection[0] > intersection[1]:
+            raise InvalidIntersectionError
+    elif isinstance(intersection, range) is True:
+        intersection_tuple = tuple(intersection)
+        if intersection_tuple == ():
+            raise InvalidIntersectionError
+        else:
+            intersection = (intersection_tuple[0], intersection_tuple[-1] + 1)
+    else:
+        raise InvalidArgumentError
+    return intersection
 
 
 def find_values(source, destination, return_value):
@@ -128,7 +145,16 @@ def find_values(source, destination, return_value):
         return intersection, remainders
 
 
-def transform_intersection(source, destination, value_to_add):
+def transform_existing_intersection(intersection, value_to_add):
+    if not intersection:
+        return None
+    else:
+        intersection = check_valid_intersection(intersection)
+        new_intersection = (intersection[0] + value_to_add, intersection[1] + value_to_add)
+        return new_intersection
+
+
+def transform_new_intersection(source, destination, value_to_add):
     source, destination = check_valid(source, destination)
     intersection = find_values(source, destination, 'intersection')
     if not intersection:
