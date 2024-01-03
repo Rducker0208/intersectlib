@@ -1,10 +1,15 @@
-from intersectlib_code import find_remainders
-from intersectlib_code import find_intersection
-from intersectlib_code import InvalidRangeError
-from intersectlib_code import InvalidTupleError
-from intersectlib_code import InvalidArgumentError
-
 import unittest
+import sys
+
+sys.path.insert(1, 'C://Users//ducke//PycharmProjects//intersectlib//intersectlib')
+
+from intersectlib import find_remainders
+from intersectlib import find_intersection
+from intersectlib import find_intersection_and_remainders
+from intersectlib import transform_intersection
+from intersectlib import InvalidTupleError
+from intersectlib import InvalidRangeError
+from intersectlib import InvalidArgumentError
 
 
 class TestFile(unittest.TestCase):
