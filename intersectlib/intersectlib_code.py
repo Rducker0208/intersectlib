@@ -15,9 +15,10 @@ class InvalidRangeError(Exception):
         self.message = 'The passed range is invalid.'
         super().__init__(self.message)
 
+
 class InvalidIntersectionError(Exception):
     def __init__(self):
-        self.message = 'The provided intersection contains a non-numeric item, contains more then 2 items or the beginning value is higher then the end value.'
+        self.message = 'The provided intersection contains a non-numeric item, contains more then 2 items or the beginning value is higher then the end value.' # noqa
 
 
 class NoneRangeError(Exception):
@@ -60,7 +61,7 @@ def check_valid(source, destination):
 
 def check_valid_intersection(intersection):
     if isinstance(intersection, tuple) is True:
-        if all(isinstance(item, int) for item in intersection) is False or len(intersection) > 2 or intersection[0] > intersection[1]:
+        if all(isinstance(item, int) for item in intersection) is False or len(intersection) > 2 or intersection[0] > intersection[1]:  # noqa
             raise InvalidIntersectionError
     elif isinstance(intersection, range) is True:
         intersection_tuple = tuple(intersection)
@@ -115,13 +116,13 @@ def find_values(source, destination, return_value):
         intersection = (source_lowest, source_highest)
 
     # case 5
-    elif source_lowest < destination_lowest and source_highest > destination_lowest:  # noqa
+    elif source_lowest < destination_lowest < source_highest and source_highest > destination_lowest:
         print('5')
         intersection = (destination_lowest, source_highest)
         remainders.append((source_lowest, destination_lowest))
 
     # case 6
-    elif destination_lowest < source_lowest and source_highest > destination_highest:
+    elif destination_lowest < source_lowest < destination_highest < source_highest:
         print('6')
         intersection = (source_lowest, destination_highest)
         remainders.append((destination_highest, source_highest))
