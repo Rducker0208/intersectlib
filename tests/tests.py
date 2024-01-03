@@ -5,11 +5,11 @@ sys.path.insert(1, 'C://Users//ducke//PycharmProjects//intersectlib//intersectli
 
 from intersectlib import find_remainders
 from intersectlib import find_intersection
-from intersectlib import find_intersection_and_remainders
 from intersectlib import transform_existing_intersection
 from intersectlib import InvalidTupleError
 from intersectlib import InvalidRangeError
 from intersectlib import InvalidArgumentError
+from intersectlib import InvalidIntersectionError
 
 
 class TestFile(unittest.TestCase):
@@ -23,6 +23,10 @@ class TestFile(unittest.TestCase):
         self.assertRaises(InvalidArgumentError, find_intersection, 'p', (9, 10))
         self.assertRaises(InvalidArgumentError, find_intersection, [], (9, 10))
         self.assertRaises(InvalidArgumentError, find_intersection, range, (9, 10))
+
+        self.assertRaises(InvalidIntersectionError, transform_existing_intersection, (10, 5), 2)
+        self.assertRaises(InvalidIntersectionError, transform_existing_intersection, (2, 5, 8), 2)
+        self.assertRaises(InvalidIntersectionError, transform_existing_intersection, (5, 'p'), 2)
 
     def testIntersection(self):
         # 1.1
@@ -233,3 +237,16 @@ class TestFile(unittest.TestCase):
 
         result = find_remainders((500, 1000), (1500, 2000))
         self.assertEqual(result, [(500, 1000)])
+
+    def testTransform(self):
+        result = transform_existing_intersection((5, 10), 5)
+        self.assertEqual(result, (10, 15))
+
+        result = transform_existing_intersection((-3, 5), 5)
+        self.assertEqual(result, (2, 10))
+
+        result = transform_existing_intersection((-5, -4), -2)
+        self.assertEqual(result, (-7, -6))
+
+        result = transform_existing_intersection((10, 15), -30)
+        self.assertEqual(result, (-20, -15))

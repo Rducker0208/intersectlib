@@ -83,58 +83,48 @@ def find_values(source, destination, return_value):
 
     # case 1.1
     if source_lowest == destination_lowest and source_highest > destination_highest:
-        print('1.1')
         intersection = (destination_lowest, destination_highest)
         remainders.append((destination_highest, source_highest))
 
     # case 1.2
     elif source_lowest < destination_lowest and source_highest > destination_highest:
-        print('1.2')
         intersection = (destination_lowest, destination_highest)
         remainders.append((source_lowest, destination_lowest))
         remainders.append((destination_highest, source_highest))
 
     # case 1.3
     elif source_lowest < destination_lowest and source_highest == destination_highest:
-        print('1.3')
         intersection = (destination_lowest, destination_highest)
         remainders.append((source_lowest, destination_lowest))
 
     # case 2
     elif destination_lowest < source_lowest and destination_highest > source_highest:
-        print('2')
         intersection = (source_lowest, source_highest)
 
     # case 3
     elif source_lowest == destination_lowest and source_highest < destination_highest:
-        print('3')
         intersection = (source_lowest, source_highest)
 
     # case 4
     elif destination_lowest < source_lowest and destination_highest == source_highest:
-        print('4')
         intersection = (source_lowest, source_highest)
 
     # case 5
     elif source_lowest < destination_lowest < source_highest and source_highest > destination_lowest:
-        print('5')
         intersection = (destination_lowest, source_highest)
         remainders.append((source_lowest, destination_lowest))
 
     # case 6
     elif destination_lowest < source_lowest < destination_highest < source_highest:
-        print('6')
         intersection = (source_lowest, destination_highest)
         remainders.append((destination_highest, source_highest))
 
     # case 7
     elif destination_lowest == source_lowest and destination_highest == source_highest:
-        print('7')
         intersection = (source_lowest, source_highest)
 
     # case 8
     else:
-        print('8')
         intersection = None
         remainders.append((source_lowest, source_highest))
 
