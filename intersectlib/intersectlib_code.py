@@ -27,7 +27,7 @@ class NoneRangeError(Exception):
         super().__init__(self.message)
 
 
-def check_valid(source, destination):
+def check_valid(source: tuple | range, destination: tuple | range):
 
     # check if passed argument is a tuple or range
     if isinstance(source, tuple) is True:
@@ -59,7 +59,7 @@ def check_valid(source, destination):
     return source, destination
 
 
-def check_valid_intersection(intersection):
+def check_valid_intersection(intersection: tuple | range):
     if isinstance(intersection, tuple) is True:
         if all(isinstance(item, int) for item in intersection) is False or len(intersection) > 2 or intersection[0] > intersection[1]:  # noqa
             raise InvalidIntersectionError
@@ -74,7 +74,7 @@ def check_valid_intersection(intersection):
     return intersection
 
 
-def find_values(source, destination, return_value):
+def find_values(source: tuple | range, destination: tuple | range, return_value: str):
     source_lowest, source_highest = source
     destination_lowest, destination_highest = destination
     remainders = []
@@ -136,7 +136,8 @@ def find_values(source, destination, return_value):
         return intersection, remainders
 
 
-def transform_existing_intersection(intersection, value_to_add):
+def transform_existing_intersection(intersection: tuple | range, value_to_add: int):
+    """Transform an existing intersection with a value"""
     if not intersection:
         return None
     else:
@@ -145,7 +146,8 @@ def transform_existing_intersection(intersection, value_to_add):
         return new_intersection
 
 
-def transform_new_intersection(source, destination, value_to_add):
+def transform_new_intersection(source: tuple | range, destination: tuple | range, value_to_add: int):
+    """Find a new itersection using two ranges and transform it with a value"""
     source, destination = check_valid(source, destination)
     intersection = find_values(source, destination, 'intersection')
     if not intersection:
@@ -155,19 +157,22 @@ def transform_new_intersection(source, destination, value_to_add):
         return new_intersection
 
 
-def find_intersection(source, destination):
+def find_intersection(source: tuple | range, destination: tuple | range):
+    """Get the intersection of two ranges"""
     source, destination = check_valid(source, destination)
     intersection = find_values(source, destination, 'intersection')
     return intersection
 
 
-def find_remainders(source, destination):
+def find_remainders(source: tuple | range, destination: tuple | range):
+    """Get the remainder of the source when you remove the intersection"""
     source, destination = check_valid(source, destination)
     remainders = find_values(source, destination, 'remainders')
     return remainders
 
 
-def find_intersection_and_remainders(source, destination):
+def find_intersection_and_remainders(source: tuple | range, destination: tuple | range):
+    """Get both the intersection and remainders of two ranges"""
     source, destination = check_valid(source, destination)
     intersection, remainders = find_values(source, destination, 'both')
     return intersection, remainders
