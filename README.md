@@ -46,7 +46,7 @@ transform_new_intersection((2, 10), range(5, 12), 5) >> (10, 15)
 transform_existing_intersection(intersection: tuple | range, value_to_add: tuple | range)
 
 transform_existing_intersection((5, 10), 5) >> (10, 15)
-transform_existing_intersection=((5, 10), -3) >> (2, 7)
+transform_existing_intersection((5, 10), -3) >> (2, 7)
 ```
 
 
